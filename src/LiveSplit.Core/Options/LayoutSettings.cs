@@ -38,6 +38,8 @@ public class LayoutSettings : ICloneable
     public bool UseRainbowColor { get; set; }
 
     public float Opacity { get; set; }
+    public bool AlphaTransparency { get; set; }
+    public bool TransparentBackground { get; set; }
     public bool MousePassThroughWhileRunning { get; set; }
     public bool AllowResizing { get; set; }
     public bool AllowMoving { get; set; }
@@ -75,6 +77,8 @@ public class LayoutSettings : ICloneable
         AntiAliasing = settings.AntiAliasing;
         DropShadows = settings.DropShadows;
         Opacity = settings.Opacity;
+        AlphaTransparency = settings.AlphaTransparency;
+        TransparentBackground = settings.TransparentBackground;
         MousePassThroughWhileRunning = settings.MousePassThroughWhileRunning;
         BackgroundType = settings.BackgroundType;
         BackgroundImage = settings.BackgroundImage;

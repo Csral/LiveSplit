@@ -86,6 +86,8 @@
             this.chkBestSegments = new System.Windows.Forms.CheckBox();
             this.chkMousePassThroughWhileRunning = new System.Windows.Forms.CheckBox();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBox();
+            this.chkAlphaTransparency = new System.Windows.Forms.CheckBox();
+            this.chkTransparentBackground = new System.Windows.Forms.CheckBox();
             this.chkAllowResizing = new System.Windows.Forms.CheckBox();
             this.chkAllowMoving = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5.SuspendLayout();
@@ -116,6 +118,9 @@
             this.tableLayoutPanel5.Controls.Add(this.chkBestSegments, 0, 4);
             this.tableLayoutPanel5.Controls.Add(this.chkMousePassThroughWhileRunning, 0, 5);
             this.tableLayoutPanel5.Controls.Add(this.chkAlwaysOnTop, 2, 4);
+            this.tableLayoutPanel5.Controls.Add(this.chkAlphaTransparency, 0, 7);
+            this.tableLayoutPanel5.SetColumnSpan(this.chkAlphaTransparency, 2);
+            this.tableLayoutPanel5.Controls.Add(this.chkTransparentBackground, 2, 7);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(7, 7);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -127,9 +132,8 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(462, 570);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(462, 599);
             this.tableLayoutPanel5.TabIndex = 41;
             // 
             // groupBox2
@@ -883,6 +887,26 @@
             this.chkAllowResizing.TabIndex = 28;
             this.chkAllowResizing.Text = "Allow Resizing";
             this.chkAllowResizing.UseVisualStyleBackColor = true;
+            //
+            // chkAlphaTransparency
+            //
+            this.chkAlphaTransparency.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkAlphaTransparency.AutoSize = true;
+            this.chkAlphaTransparency.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkAlphaTransparency.Name = "chkAlphaTransparency";
+            this.chkAlphaTransparency.TabIndex = 30;
+            this.chkAlphaTransparency.Text = "Alpha transparency";
+            this.chkAlphaTransparency.UseVisualStyleBackColor = true;
+            //
+            // chkTransparentBackground
+            //
+            this.chkTransparentBackground.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkTransparentBackground.AutoSize = true;
+            this.chkTransparentBackground.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkTransparentBackground.Name = "chkTransparentBackground";
+            this.chkTransparentBackground.TabIndex = 31;
+            this.chkTransparentBackground.Text = "Transparent background";
+            this.chkTransparentBackground.UseVisualStyleBackColor = true;
             // 
             // chkAllowMoving
             // 
@@ -904,7 +928,7 @@
             this.Controls.Add(this.tableLayoutPanel5);
             this.Name = "LayoutSettingsControl";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(476, 584);
+            this.Size = new System.Drawing.Size(476, 613);
             this.Load += new System.EventHandler(this.LayoutSettingsControl_Load);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
@@ -954,6 +978,8 @@
         private System.Windows.Forms.Button btnTextColor;
         private System.Windows.Forms.Button btnPausedColor;
         private System.Windows.Forms.CheckBox chkAlwaysOnTop;
+        private System.Windows.Forms.CheckBox chkAlphaTransparency;
+        private System.Windows.Forms.CheckBox chkTransparentBackground;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox chkAntiAliasing;

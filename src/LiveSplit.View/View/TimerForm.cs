@@ -1526,7 +1526,12 @@ public partial class TimerForm : Form
 
         DrawBackground(g);
 
-        Opacity = Layout.Settings.Opacity;
+        // Per-pixel alpha uses the blend function's opacity instead of Form.Opacity.
+        // SetLayeredWindowAttributes (used by WinForms) prevents UpdateLayeredWindow from working.
+        if (!UsesAlphaTransparency)
+        {
+            Opacity = Layout.Settings.Opacity;
+        }
 
         // Set MousePassThrough after setting Opacity, because setting Opacity can reset the Form's WS_EX_LAYERED flag.
         MousePassThrough = Layout.Settings.MousePassThroughWhileRunning && Model.CurrentState.CurrentPhase == TimerPhase.Running && !IsForegroundWindow;
@@ -1534,7 +1539,8 @@ public partial class TimerForm : Form
         AllowResizing = Layout.Settings.AllowResizing;
         AllowMoving = Layout.Settings.AllowMoving;
 
-        g.TextRenderingHint = Layout.Settings.AntiAliasing ? TextRenderingHint.AntiAlias : TextRenderingHint.ClearTypeGridFit;
+        g.TextRenderingHint = Layout.Settings.AntiAliasing || UsesAlphaTransparency
+            ? TextRenderingHint.AntiAlias : TextRenderingHint.ClearTypeGridFit;
 
         g.CompositingQuality = CompositingQuality.GammaCorrected;
         g.InterpolationMode = InterpolationMode.Bilinear;
@@ -1572,6 +1578,13 @@ public partial class TimerForm : Form
     {
         try
         {
+            UpdateAlphaTransparency();
+            if (UsesAlphaTransparency)
+            {
+                PaintAlphaWindow();
+                return;
+            }
+
             Region clip = e.Graphics.Clip;
             e.Graphics.Clip = new Region();
             PaintForm(e.Graphics, clip);
@@ -1585,6 +1598,11 @@ public partial class TimerForm : Form
 
     private void DrawBackground(Graphics g)
     {
+        if (Layout.Settings.TransparentBackground)
+        {
+            return;
+        }
+
         if (Layout.Settings.BackgroundType == BackgroundType.Image)
         {
             if (Layout.Settings.BackgroundImage != null)
@@ -1607,7 +1625,7 @@ public partial class TimerForm : Form
             || (Layout.Settings.BackgroundType != BackgroundType.SolidColor
             && Layout.Settings.BackgroundColor2 != Color.Transparent))
         {
-            var gradientBrush = new LinearGradientBrush(
+            using var gradientBrush = new LinearGradientBrush(
                 new PointF(0, 0),
                 Layout.Settings.BackgroundType == BackgroundType.HorizontalGradient ? new PointF(Size.Width, 0) : new PointF(0, Size.Height),
                 Layout.Settings.BackgroundColor,
@@ -1648,7 +1666,7 @@ public partial class TimerForm : Form
                 croppedHeight = image.Width * (Height / (float)Width);
             }
 
-            var bitmap = new Bitmap(Width, Height, image.PixelFormat);
+            var bitmap = new Bitmap(Width, Height, PixelFormat.Format32bppPArgb);
 
             using (var g = Graphics.FromImage(bitmap))
             {
@@ -1656,7 +1674,7 @@ public partial class TimerForm : Form
                 {
                     Matrix33 = opacity
                 };
-                var attributes = new ImageAttributes();
+                using var attributes = new ImageAttributes();
                 attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -3010,18 +3028,28 @@ public partial class TimerForm : Form
     private Image MakeScreenShot()
     {
         var image = new Bitmap(Width, Height);
-        var graphics = Graphics.FromImage(image);
+        using var graphics = Graphics.FromImage(image);
 
         graphics.CompositingMode = CompositingMode.SourceCopy;
         graphics.FillRectangle(Brushes.Transparent, 0, 0, Width, Height);
         graphics.CompositingMode = CompositingMode.SourceOver;
 
-        // Start with a black background because we don't support the window being transparent, so this is closer to how LiveSplit actually looks
-        graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, Width, Height);
+        if (!UsesAlphaTransparency)
+        {
+            graphics.Clear(Color.Black);
+        }
 
-        var drawRegion = new Region(new Rectangle(0, 0, Width, Height));
-        UpdateRegion = drawRegion;
-        PaintForm(graphics, drawRegion);
+        using var drawRegion = new Region(new Rectangle(0, 0, Width, Height));
+        Region previousRegion = UpdateRegion;
+        try
+        {
+            UpdateRegion = drawRegion;
+            PaintForm(graphics, drawRegion);
+        }
+        finally
+        {
+            UpdateRegion = previousRegion;
+        }
 
         return image;
     }

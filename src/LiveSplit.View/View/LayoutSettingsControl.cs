@@ -36,6 +36,8 @@ public partial class LayoutSettingsControl : UserControl
         Layout = layout;
         chkBestSegments.DataBindings.Add("Checked", Settings, "ShowBestSegments", false, DataSourceUpdateMode.OnPropertyChanged);
         chkAlwaysOnTop.DataBindings.Add("Checked", Settings, "AlwaysOnTop", false, DataSourceUpdateMode.OnPropertyChanged);
+        chkAlphaTransparency.DataBindings.Add("Checked", Settings, "AlphaTransparency", false, DataSourceUpdateMode.OnPropertyChanged);
+        chkTransparentBackground.DataBindings.Add("Checked", Settings, "TransparentBackground", false, DataSourceUpdateMode.OnPropertyChanged);
         chkAntiAliasing.DataBindings.Add("Checked", Settings, "AntiAliasing", false, DataSourceUpdateMode.OnPropertyChanged);
         chkDropShadows.DataBindings.Add("Checked", Settings, "DropShadows", false, DataSourceUpdateMode.OnPropertyChanged);
         chkRainbow.DataBindings.Add("Checked", Settings, "UseRainbowColor", false, DataSourceUpdateMode.OnPropertyChanged);

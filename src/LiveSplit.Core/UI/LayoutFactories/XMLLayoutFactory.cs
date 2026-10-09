@@ -37,6 +37,8 @@ public class XMLLayoutFactory : ILayoutFactory
             AntiAliasing = SettingsHelper.ParseBool(element["AntiAliasing"], true),
             DropShadows = SettingsHelper.ParseBool(element["DropShadows"], true),
             Opacity = SettingsHelper.ParseFloat(element["Opacity"], 1),
+            AlphaTransparency = SettingsHelper.ParseBool(element["AlphaTransparency"], false),
+            TransparentBackground = SettingsHelper.ParseBool(element["TransparentBackground"], false),
             MousePassThroughWhileRunning = SettingsHelper.ParseBool(element["MousePassThroughWhileRunning"]),
             AllowResizing = SettingsHelper.ParseBool(element["AllowResizing"], true),
             AllowMoving = SettingsHelper.ParseBool(element["AllowMoving"], true),

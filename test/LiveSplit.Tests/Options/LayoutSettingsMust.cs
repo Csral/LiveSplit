@@ -37,6 +37,8 @@ public class LayoutSettingsMust
             AllowMoving = true,
             NotRunningColor = Color.Gray,
             Opacity = 9.1F,
+            AlphaTransparency = true,
+            TransparentBackground = true,
             PausedColor = Color.HotPink,
             PersonalBestColor = Color.Aqua,
             SeparatorsColor = Color.White,
@@ -74,6 +76,8 @@ public class LayoutSettingsMust
         Assert.True(sut.AllowMoving);
         Assert.Equal(Color.Gray, sut.NotRunningColor);
         Assert.Equal(9.1F, sut.Opacity);
+        Assert.True(sut.AlphaTransparency);
+        Assert.True(sut.TransparentBackground);
         Assert.Equal(Color.HotPink, sut.PausedColor);
         Assert.Equal(Color.Aqua, sut.PersonalBestColor);
         Assert.Equal(Color.White, sut.SeparatorsColor);

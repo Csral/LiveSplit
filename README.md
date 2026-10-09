@@ -26,6 +26,12 @@ LiveSplit is a timer program for speedrunners that is both easy to use and full 
 
 **Layout System:** Users can modify every part of LiveSplit’s appearance using Layouts. Every user has the ability to add or remove parts along with being able to rearrange and customize each part of LiveSplit. You can even use your own background images.
 
+**Transparent background:** Open **Edit Layout → Layout Settings** and check **Transparent background** to remove the layout background, component backgrounds, alternating split row colors, and current split highlight. Text, times, and icons remain visible. Uncheck it to restore the configured backgrounds. Save the layout to keep the setting.
+
+**Alpha transparency:** For translucent backgrounds instead, enable **Alpha transparency** and adjust the background colors' **Alpha** values. Keep **Opacity** at **100%** to keep text and times fully visible. Transparent PNG backgrounds and image opacity are also supported.
+
+The transparent window keeps its full rectangular mouse area: drag from empty space, resize at the edges, or right-click anywhere inside it. **Allow Moving**, **Allow Resizing**, and **Ignore Mouse While Running and Not In Focus** still control those actions.
+
 **Dynamic Resizing:** LiveSplit can be resized to any size so that it looks good on stream. As LiveSplit’s size is changed, all of its parts are automatically scaled up in order to preserve its appearance.
 
 **Sharing Runs:** Any run can be shared to [Speedrun.com](http://speedrun.com/), [X (Twitter)](https://twitter.com/), and [Bluesky](https://bsky.app/). You can also share a screenshot of your splits to [Imgur](http://imgur.com/) or save it as a file. Your [Twitch](http://www.twitch.tv/) title can be updated as well based on the game you are playing.

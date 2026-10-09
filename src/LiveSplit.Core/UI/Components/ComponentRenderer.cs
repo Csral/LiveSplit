@@ -181,6 +181,8 @@ public class ComponentRenderer
                         ApplyFontOverrides(overrideLookup, component, state.LayoutSettings, out Font origTimer, out Font origTimes, out Font origText);
                         try
                         {
+                            using var backgroundOverride = state.LayoutSettings.TransparentBackground
+                                ? new ComponentBackgroundOverride(component) : null;
                             if (mode == LayoutMode.Vertical)
                             {
                                 DrawVerticalComponent(index, g, state, width, height, clipRegion);
